@@ -110,7 +110,7 @@ for qx = -Qx:Qx
                         else % no source radiation pattern
                             vec_bn = sinc(vec_ell-D-zeta);
                         end 
-
+                        tau = tau + D +1;
                         if tau + D < Lh && tau-D>0
                             hVec(tau-D:tau+D) = hVec(tau-D:tau+D) ...
                                 + (betas / (4*pi*dt))*vec_win.*vec_bn;           %
@@ -129,11 +129,11 @@ end
 % d = fdesign.lowpass('N,Fc,Ap,Ast',16,0.9,0.5,40);
 % designmethods(d)
 % hd = design(d,'equiripple');
-hlowpass=[-0.0056646; 0.031756; -0.033528; 0.050612; -0.065185; 0.079288;...
-    -0.090623;0.098038;0.89939;0.098038;-0.090623;0.079288;-0.065185;...
-    0.050612;-0.033528;0.031756;-0.0056646];
+% hlowpass=[-0.0056646; 0.031756; -0.033528; 0.050612; -0.065185; 0.079288;...
+%     -0.090623;0.098038;0.89939;0.098038;-0.090623;0.079288;-0.065185;...
+%    0.050612;-0.033528;0.031756;-0.0056646];
 % fvtool(hlowpass);
-hVec = filter(hlowpass, 1, hVec);
+%hVec = filter(hlowpass, 1, hVec);
 hVec = hVec(D+1:D+Lh);
 
 % high pass the impulse response
